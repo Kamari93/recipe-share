@@ -2,7 +2,7 @@
 
 A full-stack web application for food enthusiasts to create, save, and manage recipes. The app features user authentication, recipe management, and a clean, responsive user interface.
 
-Live App: recipe-share-server-brown.vercel.app
+Live App: https://recipe-share-client-delta.vercel.app/
 
 ---
 

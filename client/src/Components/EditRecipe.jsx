@@ -13,10 +13,12 @@ function EditRecipe() {
     ingredients: "",
     imageUrl: "",
   });
-
+  axios.defaults.withCredentials = true;
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/recipe/recipe-by-id/${id}`)
+      .get(
+        `https://recipe-share-server-brown.vercel.app/recipe/recipe-by-id/${id}`
+      )
       .then((res) => setRecipe(res.data))
       .catch((err) => console.error(err));
   }, []);
@@ -29,10 +31,13 @@ function EditRecipe() {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .put(`http://localhost:5000/recipe/edit-recipe/${id}`, {
-        ...recipe,
-        userId,
-      })
+      .put(
+        `https://recipe-share-server-brown.vercel.app/recipe/edit-recipe/${id}`,
+        {
+          ...recipe,
+          userId,
+        }
+      )
       .then(() => {
         alert("Recipe updated successfully!");
         navigate(`/read-recipe/${id}`);

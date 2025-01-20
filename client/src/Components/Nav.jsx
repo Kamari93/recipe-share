@@ -11,9 +11,9 @@ function Nav() {
   const handleLogout = () => {
     // clear local storage
     window.localStorage.clear();
-
+    axios.defaults.withCredentials = true;
     axios
-      .get("http://localhost:5000/auth/logout")
+      .get("https://recipe-share-server-brown.vercel.app/auth/logout")
       .then((result) => {
         // window.location.reload(); // reload the page
         navigate("/");

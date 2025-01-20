@@ -9,9 +9,10 @@ function Home() {
   const [currentPage, setCurrentPage] = useState(1); // Track the current page for pagination
   const [recipesPerPage] = useState(8); // Number of recipes per page
   const username = localStorage.getItem("username");
+  axios.defaults.withCredentials = true;
   useEffect(() => {
     axios
-      .get("http://localhost:5000/recipe/recipes")
+      .get("https://recipe-share-server-brown.vercel.app/recipe/recipes")
       .then((recipes) => {
         setRecipes(recipes.data);
       })

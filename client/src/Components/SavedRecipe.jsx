@@ -7,14 +7,16 @@ import RecipeCard from "./RecipeCard";
 function SavedRecipe() {
   const [savedRecipes, setSavedRecipes] = useState([]);
   const userId = window.localStorage.getItem("id");
-
+  axios.defaults.withCredentials = true;
   useEffect(() => {
     if (!userId) {
       navigate("/auth/login"); // Redirect to login if not logged in
       return;
     }
     axios
-      .get(`http://localhost:5000/recipe/user-recipes/${userId}`)
+      .get(
+        `https://recipe-share-server-brown.vercel.app/recipe/user-recipes/${userId}`
+      )
       .then((recipes) => {
         setSavedRecipes(recipes.data);
       })

@@ -17,7 +17,7 @@ function CreateRecipe() {
     const { name, value } = e.target;
     setRecipe({ ...recipe, [name]: value }); // use spread operator to update the state for each input
   }
-
+  axios.defaults.withCredentials = true;
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -27,7 +27,10 @@ function CreateRecipe() {
     }
 
     axios
-      .post("http://localhost:5000/recipe/create-recipe", recipe)
+      .post(
+        "https://recipe-share-server-brown.vercel.app/recipe/create-recipe",
+        recipe
+      )
       .then((result) => {
         console.log(result.data);
         alert("Recipe Created");

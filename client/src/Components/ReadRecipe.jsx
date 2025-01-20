@@ -12,11 +12,13 @@ function ReadRecipe() {
   const [recipe, setRecipe] = useState({});
   const [savedRecipes, setSavedRecipes] = useState([]);
   const navigate = useNavigate();
-
+  axios.defaults.withCredentials = true;
   useEffect(() => {
     const getRecipe = () => {
       axios
-        .get(`http://localhost:5000/recipe/recipe-by-id/${id}`)
+        .get(
+          `https://recipe-share-server-brown.vercel.app/recipe/recipe-by-id/${id}`
+        )
         .then((result) => {
           setRecipe(result.data);
         })
@@ -26,7 +28,9 @@ function ReadRecipe() {
     const fetchSavedRecipes = () => {
       if (userId === null) return;
       axios
-        .get(`http://localhost:5000/recipe/saved-recipes/${userId}`)
+        .get(
+          `https://recipe-share-server-brown.vercel.app/recipe/saved-recipes/${userId}`
+        )
         .then((result) => {
           // console.log(result.data);
           setSavedRecipes(result.data);
@@ -44,7 +48,10 @@ function ReadRecipe() {
       return;
     }
     axios
-      .put("http://localhost:5000/recipe/", { userId, recipeId })
+      .put("https://recipe-share-server-brown.vercel.app/recipe/", {
+        userId,
+        recipeId,
+      })
       .then((result) => {
         // console.log(result);
         setSavedRecipes(result.data.savedRecipes);
@@ -61,7 +68,10 @@ function ReadRecipe() {
     }
 
     axios
-      .put("http://localhost:5000/recipe/unsave-recipe", { userId, recipeId })
+      .put(
+        "https://recipe-share-server-brown.vercel.app/recipe/unsave-recipe",
+        { userId, recipeId }
+      )
       .then((result) => {
         setSavedRecipes(result.data.savedRecipes);
       })
@@ -79,9 +89,12 @@ function ReadRecipe() {
     }
 
     axios
-      .delete(`http://localhost:5000/recipe/delete-recipe/${recipeId}`, {
-        data: { userId }, // Pass the userId in the request body
-      })
+      .delete(
+        `https://recipe-share-server-brown.vercel.app/recipe/delete-recipe/${recipeId}`,
+        {
+          data: { userId }, // Pass the userId in the request body
+        }
+      )
       .then(() => {
         alert("Recipe deleted successfully.");
         // window.location.href = "/"; // Redirect to home or another page

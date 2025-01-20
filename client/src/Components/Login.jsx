@@ -15,7 +15,10 @@ function Login() {
     e.preventDefault();
 
     axios
-      .post("http://localhost:5000/auth/login", { username, password })
+      .post("https://recipe-share-server-brown.vercel.app/auth/login", {
+        username,
+        password,
+      })
       .then((result) => {
         console.log(result);
         navigate("/");

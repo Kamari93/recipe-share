@@ -7,12 +7,15 @@ function Register() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
-
+  axios.defaults.withCredentials = true;
   const handleSubmit = (e) => {
     e.preventDefault();
 
     axios
-      .post("http://localhost:5000/auth/register", { username, password })
+      .post("https://recipe-share-server-brown.vercel.app/auth/register", {
+        username,
+        password,
+      })
       .then((result) => {
         console.log(result);
         navigate("/auth/login");

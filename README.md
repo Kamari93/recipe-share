@@ -52,8 +52,8 @@ A full-stack web application for food enthusiasts to create, save, and manage re
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/yourusername/mern-recipe-app.git
-   cd mern-recipe-app
+   git clone https://github.com/yourusername/recipe-share.git
+   cd recipe-share
    ```
 
 2. Install dependencies:

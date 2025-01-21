@@ -29,7 +29,7 @@ function Login() {
         navigate("/"); // Navigate to the homepage
       } else {
         setError(result.data.message); // Display error message
-        alert(error);
+        alert(result.data.message);
       }
     } catch (err) {
       setError("An unexpected error occurred. Please try again."); // Catch unexpected errors

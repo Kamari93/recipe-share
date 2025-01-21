@@ -6,27 +6,54 @@ import { Link, useNavigate } from "react-router-dom";
 function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState(""); // For error messages
   const navigate = useNavigate();
 
   //   const navigate = useNavigate();
 
   axios.defaults.withCredentials = true;
-  const handleSubmit = (e) => {
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+
+  //   axios
+  //     .post("https://recipe-share-server-brown.vercel.app/auth/login", {
+  //       username,
+  //       password,
+  //     })
+  //     .then((result) => {
+  //       console.log(result);
+  //       navigate("/");
+  //       window.localStorage.setItem("id", result.data.id); // Store the user ID in local storage
+  //       window.localStorage.setItem("username", result.data.username); // Store the username in local storage
+  //     })
+  //     .catch((err) => console.log(err));
+  // };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    axios
-      .post("https://recipe-share-server-brown.vercel.app/auth/login", {
-        username,
-        password,
-      })
-      .then((result) => {
-        console.log(result);
-        navigate("/");
-        window.localStorage.setItem("id", result.data.id); // Store the user ID in local storage
-        window.localStorage.setItem("username", result.data.username); // Store the username in local storage
-      })
-      .catch((err) => console.log(err));
+    try {
+      const result = await axios.post(
+        "https://recipe-share-server-brown.vercel.app/auth/login",
+        {
+          username,
+          password,
+        }
+      );
+
+      // Check the response message and navigate only if login is successful
+      if (result.data.message === "Login successful") {
+        window.localStorage.setItem("id", result.data.id); // Store user ID
+        window.localStorage.setItem("username", result.data.username); // Store username
+        navigate("/"); // Navigate to the homepage
+      } else {
+        setError(result.data.message); // Display error message
+      }
+    } catch (err) {
+      setError("An unexpected error occurred. Please try again."); // Catch unexpected errors
+    }
   };
+
   return (
     <div className="d-flex justify-content-center align-items-center vh-100">
       <div className="p-3 border border-1 w-25">

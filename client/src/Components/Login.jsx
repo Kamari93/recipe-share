@@ -9,26 +9,7 @@ function Login() {
   const [error, setError] = useState(""); // For error messages
   const navigate = useNavigate();
 
-  //   const navigate = useNavigate();
-
   axios.defaults.withCredentials = true;
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-
-  //   axios
-  //     .post("https://recipe-share-server-brown.vercel.app/auth/login", {
-  //       username,
-  //       password,
-  //     })
-  //     .then((result) => {
-  //       console.log(result);
-  //       navigate("/");
-  //       window.localStorage.setItem("id", result.data.id); // Store the user ID in local storage
-  //       window.localStorage.setItem("username", result.data.username); // Store the username in local storage
-  //     })
-  //     .catch((err) => console.log(err));
-  // };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -48,9 +29,11 @@ function Login() {
         navigate("/"); // Navigate to the homepage
       } else {
         setError(result.data.message); // Display error message
+        alert(error);
       }
     } catch (err) {
       setError("An unexpected error occurred. Please try again."); // Catch unexpected errors
+      alert(error);
     }
   };
 

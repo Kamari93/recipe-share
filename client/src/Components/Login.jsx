@@ -1,4 +1,4 @@
-import { react, useState } from "react";
+import { react, useState, useEffect } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 // import { useNavigate } from "react-router-dom";
@@ -29,13 +29,21 @@ function Login() {
         navigate("/"); // Navigate to the homepage
       } else {
         setError(result.data.message); // Display error message
-        alert(result.data.message);
+        // alert(result.data.message);
+        // alert(error);
       }
     } catch (err) {
       setError("An unexpected error occurred. Please try again."); // Catch unexpected errors
-      alert(error);
+      // alert(error);
     }
   };
+
+  // ensures that alert is shown whenever the error state changes, even if the component is re-rendered
+  useEffect(() => {
+    if (error) {
+      alert(error); // Trigger alert whenever the error state changes
+    }
+  }, [error]);
 
   return (
     <div className="d-flex justify-content-center align-items-center vh-100">
